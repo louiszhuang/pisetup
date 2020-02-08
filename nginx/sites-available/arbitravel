@@ -1,0 +1,18 @@
+server {
+        #listen 80; # Uncomment to also listen for HTTP requests
+        listen 4430 ssl http2; # HTTP/2 is only possible when using SSL
+        server_name arbitravel.net www.arbitravel.net api.arbitravel.net;
+    ssl_certificate /etc/letsencrypt/live/arbitravel.net/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/arbitravel.net/privkey.pem; # managed by Certbot
+
+        root /data/www/arbitravel;
+        location / {
+            index index.html index.htm;
+        }
+	location /api/ {
+            proxy_pass https://jipiao.jd.com/;
+        }
+
+
+
+}
