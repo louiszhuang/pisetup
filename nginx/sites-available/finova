@@ -5,7 +5,7 @@ server {
     ssl_certificate /etc/letsencrypt/live/finova.org/fullchain.pem; # managed by Certbot
     ssl_certificate_key /etc/letsencrypt/live/finova.org/privkey.pem; # managed by Certbot
 
-        root /usr/share/nginx/html;
+        root /var/www/finova;
         location / {
             index index.html index.htm;
         }
