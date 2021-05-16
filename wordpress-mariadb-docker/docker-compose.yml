@@ -26,6 +26,10 @@ services:
     volumes:
       - db:/var/lib/mysql
 
+#  test:
+#    image: ubuntu
+#    command: ["/bin/bash", "-c", "sleep 3600"]
+
 volumes:
   wordpress:
   db:
