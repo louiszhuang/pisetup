@@ -1,7 +1,6 @@
 server {
         #listen 80; # Uncomment to also listen for HTTP requests
         listen 443 ssl http2; # HTTP/2 is only possible when using SSL
-        listen [::]:443 ssl http2; # HTTP/2 is only possible when using SSL
         server_name finova.org www.finova.org api.finova.org;
     ssl_certificate /etc/letsencrypt/live/finova.org/fullchain.pem; # managed by Certbot
     ssl_certificate_key /etc/letsencrypt/live/finova.org/privkey.pem; # managed by Certbot
@@ -10,4 +9,25 @@ server {
         location / {
             index index.html index.htm;
         }
+
+
+
+}
+
+server {
+        #listen 80; # Uncomment to also listen for HTTP requests
+        listen 443 ssl http2; # HTTP/2 is only possible when using SSL
+        server_name blog.finova.org;
+    ssl_certificate /etc/letsencrypt/live/finova.org/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/finova.org/privkey.pem; # managed by Certbot
+
+	location / {
+		proxy_pass http://127.0.0.1:8001;
+		proxy_set_header Host              $host;
+		proxy_set_header X-Real-IP         $remote_addr;
+		proxy_set_header X-Forwarded-For   $proxy_add_x_forwarded_for;
+		proxy_set_header X-Forwarded-Proto $scheme;
+		proxy_set_header X-Forwarded-Host  $host;
+		proxy_set_header X-Forwarded-Port  $server_port;
+	}
 }
